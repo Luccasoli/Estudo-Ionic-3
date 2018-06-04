@@ -1,0 +1,52 @@
+Arquivos importantes:
+
+ESTRUTURA DO PROJETO:
+
+    *   ./src/index.html
+        Aqui se encontra o HTML do "site" que será carregado no dispositivo móvel
+
+        O Ionic procura a tag <ion-app> no seu HTML e os scripts:
+            <!-- The polyfills js is generated during the build process -->
+            <script src="build/polyfills.js"></script>
+
+            <!-- The vendor js is generated during the build process
+                It contains all of the dependencies in node_modules -->
+            <script src="build/vendor.js"></script>
+
+            <!-- The main bundle js is generated during the build process -->
+            <script src="build/main.js"></script>.
+    
+    *   ./src/
+        Aqui se encontra a maior parte do código que o desenvolvedor vai alterar/criar.
+
+        Ao invocar o comando CLI "ionic serve", o código javascript contido na pasta é
+        "transpilado" para ECMAScript 5 ou, em sistemas desatualizados, versões mais antigas
+        do ECMAScript.
+
+    *   ./src/app/app.module.ts
+        Início do projeto:
+            IonicModule.forRoot(MyApp) (Define o componente raiz do projeto, o primeiro
+            exibido, geralmente vazio):
+                MyApp:
+                    Essa classe contem o atributo "rootPage:any", que indica a 
+                    página inicial do aplicativo
+
+    *   ./src/app/app.component.ts
+        Componente inicial, e é nele que se encontra a classe "principal", pois é nela
+        que se encontra o atributo que define a página raiz (primeira tela do app).
+
+IONIC CLI
+    Ionic CLI (Command Line Interface) é uma ferramenta que facilita o desenvolvimento
+    com Ionic através de geradores de arquivos e atalhos sobre o projeto.
+
+    *   Comandos básicos:
+        ionic start <Nome do projeto> <Modelo>
+            Cria um aplicativo ionic com base no modelo fornecido.
+        ionic serve
+            Inicializa a visualição do aplicativo no navegador.
+        ionic dockor check
+            Verifica a "saúde" do projeto.
+        ionic docs
+            Abre a documentação do Ionic no navegador.
+        ionic generate <Tipo> <Nome>
+            Gera um componente no projeto Ionic 
