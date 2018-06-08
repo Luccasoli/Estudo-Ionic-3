@@ -15,6 +15,7 @@ import { FeedPageModule } from '../pages/feed/feed.module';
 import { IntroPageModule } from '../pages/intro/intro.module';
 import { MovieProvider } from '../providers/movie/movie';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfigProvider } from '../providers/config/config';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ConfigProvider,
     
   ] 
 })
