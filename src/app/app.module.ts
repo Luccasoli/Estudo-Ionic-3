@@ -19,34 +19,34 @@ import { ConfigProvider } from '../providers/config/config';
 
 @NgModule({
   declarations: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage
+	MyApp,
+	AboutPage,
+	ContactPage,
+	HomePage,
+	TabsPage
   ],
   imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    FeedPageModule,
-    IntroPageModule,
-    //HttpModule,
-    HttpClientModule,
+	BrowserModule,
+	IonicModule.forRoot(MyApp),
+	FeedPageModule,
+	IntroPageModule,
+	//HttpModule,
+	HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage
+	MyApp,
+	AboutPage,
+	ContactPage,
+	HomePage,
+	TabsPage
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ConfigProvider,
-    
+	StatusBar,
+	SplashScreen,
+	{provide: ErrorHandler, useClass: IonicErrorHandler},
+	ConfigProvider,
+	
   ] 
 })
 export class AppModule {}

@@ -14,8 +14,7 @@ export class HomePage {
   }
 
   goToIntroPage(): void{
-    //this.navCtrl.pop();
-    this.navCtrl.push(IntroPage);
+    this.navCtrl.parent.parent.push(IntroPage);
   }
 
 }
