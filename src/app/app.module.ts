@@ -16,37 +16,44 @@ import { IntroPageModule } from '../pages/intro/intro.module';
 import { MovieProvider } from '../providers/movie/movie';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigProvider } from '../providers/config/config';
+import { ConfiguracoesPageModule } from '../pages/configuracoes/configuracoes.module';
+import { SobrePageModule } from '../pages/sobre/sobre.module';
+import { PerfilPageModule } from '../pages/perfil/perfil.module';
+import { MovieDetailsPageModule } from '../pages/movie-details/movie-details.module';
 
 @NgModule({
-  declarations: [
-	MyApp,
-	AboutPage,
-	ContactPage,
-	HomePage,
-	TabsPage
-  ],
-  imports: [
-	BrowserModule,
-	IonicModule.forRoot(MyApp),
-	FeedPageModule,
-	IntroPageModule,
-	//HttpModule,
-	HttpClientModule,
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-	MyApp,
-	AboutPage,
-	ContactPage,
-	HomePage,
-	TabsPage
-  ],
-  providers: [
-	StatusBar,
-	SplashScreen,
-	{provide: ErrorHandler, useClass: IonicErrorHandler},
-	ConfigProvider,
-	
-  ] 
+	declarations: [
+		MyApp,
+		AboutPage,
+		ContactPage,
+		HomePage,
+		TabsPage,
+	],
+	imports: [
+		BrowserModule,
+		IonicModule.forRoot(MyApp),
+		FeedPageModule,
+		IntroPageModule,
+		//HttpModule,
+		HttpClientModule,
+		ConfiguracoesPageModule,
+		SobrePageModule,
+		PerfilPageModule,
+		MovieDetailsPageModule,
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		AboutPage,
+		ContactPage,
+		HomePage,
+		TabsPage
+	],
+	providers: [
+		StatusBar,
+		SplashScreen,
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		ConfigProvider,
+	]
 })
-export class AppModule {}
+export class AppModule { }

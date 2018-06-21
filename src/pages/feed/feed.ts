@@ -1,6 +1,7 @@
 import { MovieProvider } from './../../providers/movie/movie';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { MovieDetailsPage } from '../movie-details/movie-details';
 
 /**
  * Generated class for the FeedPage page.
@@ -17,10 +18,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FeedPage {
 
-	public nome_usuario:string = "Lucas de Oliveira Mesquita";
-	public list:any[] = ["Lucas", "3", "Leticia", "3.14", true];
 	public lista_filmes = new Array<any>();
-	
+	public loader;
+	public refresher;
+
+	public page = 1;
+	public infiniteScroll;
+
 	public objeto_feed = {
 		titulo: "Lucas de Oliveira",
 		data: "30 de Maio de 2018",
@@ -31,13 +35,33 @@ export class FeedPage {
 	}
 
 	constructor(
-		public navCtrl: NavController, 
+		public navCtrl: NavController,
 		public navParams: NavParams,
-		public movieProvider: MovieProvider) {
+		public movieProvider: MovieProvider,
+		public loadingCtrl: LoadingController) {	}
 		
+	ionViewDidEnter() {
+		this.carregarFilmes();
 	}
 
-	public somaDoisNumeros(num1:number, num2:number): void {
+	doRefresh(refresher) {
+		console.log('Begin async operation', refresher);
+		this.refresher = refresher;
+		this.carregarFilmes();
+	}
+
+	iniciarCarregamento() {
+		this.loader = this.loadingCtrl.create({
+			content: "Please wait...",
+		});
+		this.loader.present();
+	}
+
+	fecharCarregamento() {
+		this.loader.dismissAll();
+	}
+
+	public somaDoisNumeros(num1: number, num2: number): void {
 		alert(num1 + num2)
 	}
 
@@ -49,18 +73,40 @@ export class FeedPage {
 		this.objeto_feed.qntd_likes++;
 	}
 
-	ionViewDidLoad() {
-		//console.log('ionViewDidLoad FeedPage');
-		//this.somaDoisNumeros(0, 10000000);
-		this.movieProvider.getLatestMovie().subscribe(
+
+	carregarFilmes(novaPagina: boolean = false) {
+		this.iniciarCarregamento();
+		this.movieProvider.getLatestMovie(this.page).subscribe(
 			data => {
-				//data = data as any;
-				this.lista_filmes = data as any;
-				console.log(data);
+				if(novaPagina) {
+					this.lista_filmes = this.lista_filmes.concat(data.results);
+					this.infiniteScroll.complete();
+				} else { 
+					this.lista_filmes = data.results;
+				}
+				console.log(data.results);
+				console.log(this.lista_filmes);
+
+				this.fecharCarregamento();
+				this.refresher.complete();
 			}, error => {
 				console.log(error);
+				this.fecharCarregamento();
+				this.refresher.complete();
 			}
 		);
+	}
+
+	goToMovieDetails(filme) {
+		this.navCtrl.push(MovieDetailsPage, {filme: filme});
+	}
+
+	doInfinite(infiniteScroll) {
+		
+		this.page += 1;
+		this.infiniteScroll = infiniteScroll;
+		this.carregarFilmes(true);
+		
 	}
 
 }

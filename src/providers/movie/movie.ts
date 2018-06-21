@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class MovieProvider {
 
+  private idioma = "pt-BR";
   private baseAPIPath = "https://api.themoviedb.org/3";
 
   constructor(public http: HttpClient) {
@@ -21,8 +22,12 @@ export class MovieProvider {
     return "08fe5b9bfc12ebc57eccc1674f30ce0c";
   }
 
-  getLatestMovie(): Observable<Object>{
-    return this.http.get(this.baseAPIPath + "/movie/popular?api_key=" + this.getAPIKey());
+  getLatestMovie(page = 1): Observable<Object>{
+    return this.http.get(this.baseAPIPath + "/movie/popular?api_key=" + this.getAPIKey() + "&language=" + this.idioma + "&page=" + page);
+  }
+
+  getDetailsMovie(id) {
+    return this.http.get(this.baseAPIPath + "/movie/" + id + "?api_key=" + this.getAPIKey() + "&language=" + this.idioma);
   }
 
 }
