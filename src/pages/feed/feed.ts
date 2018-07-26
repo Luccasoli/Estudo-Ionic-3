@@ -77,7 +77,7 @@ export class FeedPage {
 	carregarFilmes(novaPagina: boolean = false) {
 		this.iniciarCarregamento();
 		this.movieProvider.getLatestMovie(this.page).subscribe(
-			data => {
+			(data: any) => {
 				if(novaPagina) {
 					this.lista_filmes = this.lista_filmes.concat(data.results);
 					this.infiniteScroll.complete();
@@ -88,7 +88,8 @@ export class FeedPage {
 				console.log(this.lista_filmes);
 
 				this.fecharCarregamento();
-				this.refresher.complete();
+				if(this.refresher)
+					this.refresher.complete();
 			}, error => {
 				console.log(error);
 				this.fecharCarregamento();
